@@ -4,52 +4,49 @@ const auth = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
-router.get('/', auth, async (request, response) => {
+// GET /generations (Sin autenticación)
+router.get('/', async (request, response) => {
     try {
         const generations = await genUsecase.getAllGenerations();
-
         response.json({
             success: true,
-            data: {generations}
+            data: { generations }
         });
     } catch (error) {
-        response.status(error.status || 500);
-        response.json({
+        response.status(error.status || 500).json({
             success: false,
             error: error.message
         });
     }
 });
 
-router.get('/:id', auth, async (request, response) => {
+// GET /generations/:id (Sin autenticación)
+router.get('/:id', async (request, response) => {
     try {
-        const {id} = request.params;
+        const { id } = request.params;
         const generation = await genUsecase.getGenerationById(id);
-
         response.json({
             success: true,
-            data: {generation}
+            data: { generation }
         });
     } catch (error) {
-        response.status(error.status || 500);
-        response.json({
+        response.status(error.status || 500).json({
             success: false,
             error: error.message
         });
     }
 });
 
+// Las siguientes rutas requieren autenticación
 router.post('/', auth, async (request, response) => {
     try {
         const generationCreated = await genUsecase.createGeneretion(request.body);
-
         response.json({
             success: true,
-            data: {generation: generationCreated}
+            data: { generation: generationCreated }
         });
     } catch (error) {
-        response.status(error.status || 500);
-        response.json({
+        response.status(error.status || 500).json({
             success: false,
             error: error.message
         });
@@ -58,16 +55,14 @@ router.post('/', auth, async (request, response) => {
 
 router.delete('/:id', auth, async (request, response) => {
     try {
-        const {id} = request.params
+        const { id } = request.params;
         const generationDeleted = await genUsecase.deleteGenerationById(id);
-
         response.json({
             success: true,
-            data: {generation: generationDeleted}
+            data: { generation: generationDeleted }
         });
     } catch (error) {
-        response.status(error.status || 500);
-        response.json({
+        response.status(error.status || 500).json({
             success: false,
             error: error.message
         });
@@ -76,16 +71,14 @@ router.delete('/:id', auth, async (request, response) => {
 
 router.patch('/:id', auth, async (request, response) => {
     try {
-        const {id} = request.params
+        const { id } = request.params;
         const generationUpdated = await genUsecase.updateGenerationById(id, request.body);
-
         response.json({
             success: true,
-            data: {generation: generationUpdated}
+            data: { generation: generationUpdated }
         });
     } catch (error) {
-        response.status(error.status || 500);
-        response.json({
+        response.status(error.status || 500).json({
             success: false,
             error: error.message
         });

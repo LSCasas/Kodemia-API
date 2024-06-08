@@ -6,7 +6,6 @@ const kodersRouter = require('./routes/koders.router');
 const authRouter = require('./routes/auth.router');
 const generationRouter = require('./routes/generations.router');
 
-
 const app = express();
 //Middleware
 app.use(cors())
