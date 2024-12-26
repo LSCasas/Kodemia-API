@@ -1,6 +1,6 @@
 # Koders APIv1 Generation JavaScript 33
 
-This is a repository created during the backend module in [Kodemia](https://kodemia.mx).
+This API manages secure authentication, "koders" (users), and "generations" through CRUD operations. It is modularly structured with routes, middlewares, models, and use cases, facilitating maintenance and scalability.
 
 ## How to Run
 
